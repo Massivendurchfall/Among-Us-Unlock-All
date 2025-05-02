@@ -1,5 +1,5 @@
 # Among Us Unlock All
 
-* Choose platform (Store / Steam / Epic / Itch)
+* Choose platform (Store / Steam / Epic / Itch / MS Store)
 * Automatic path detection (not working on MS)
 * Download & extract without prompts
