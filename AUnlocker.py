@@ -302,19 +302,7 @@ class AUnlockerUpdaterGUI:
             current_version = getattr(self, 'saved_version', None)
 
             if current_version:
-                try:
-                    latest_clean = latest_version.lstrip('v')
-                    current_clean = current_version.lstrip('v')
-
-                    if version.parse(latest_clean) > version.parse(current_clean):
-                        self.status_text.set(f"🆕 Update available: {latest_version}")
-                    else:
-                        self.status_text.set(f"✅ Up to date (Version {current_version})")
-                except:
-                    if latest_version != current_version:
-                        self.status_text.set(f"🆕 Update available: {latest_version}")
-                    else:
-                        self.status_text.set(f"✅ Up to date (Version {current_version})")
+                self.status_text.set(f"📥 Ready to download: {latest_version}")
             else:
                 self.status_text.set("Ready to download")
 
@@ -348,23 +336,6 @@ class AUnlockerUpdaterGUI:
 
             release_data = response.json()
             latest_version = release_data['tag_name']
-
-            current_version = getattr(self, 'saved_version', None)
-
-            if current_version:
-                try:
-                    latest_clean = latest_version.lstrip('v')
-                    current_clean = current_version.lstrip('v')
-
-                    if version.parse(latest_clean) <= version.parse(current_clean):
-                        self.status_text.set(f"✅ Already up to date (Version {current_version})")
-                        self.download_button.config(state="normal")
-                        return
-                except:
-                    if latest_version == current_version:
-                        self.status_text.set(f"✅ Already up to date (Version {current_version})")
-                        self.download_button.config(state="normal")
-                        return
 
             self.status_text.set(f"🆕 Downloading version {latest_version}...")
             self.download_and_install(release_data)
